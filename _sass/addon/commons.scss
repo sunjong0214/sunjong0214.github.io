@@ -692,7 +692,8 @@ $btn-mb: 0.5rem;
   
   /* background: var(--sidebar-bg); */
   background: url('/assets/img/newjeans.jpeg');
-  background-size: 100% 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
   border-right: 1px solid var(--sidebar-border-color);
 
