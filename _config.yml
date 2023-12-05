@@ -70,7 +70,7 @@ theme_mode: dark # [light|dark]
 # will be added to all image (site avatar & posts' images) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-img_cdn: "https://chirpy-img.netlify.app"
+img_cdn: "https://image.fmkorea.com/files/attach/new3/20230303/3254535/4778984766/5547038859/8d08c15b0bc071cc47c757b61745bc94.jpeg"
 
 # the avatar on sidebar, support local or CORS resources
 avatar: "https://image.fmkorea.com/files/attach/new3/20230303/3254535/4778984766/5547038859/8d08c15b0bc071cc47c757b61745bc94.jpeg"
