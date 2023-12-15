@@ -1071,8 +1071,6 @@ public int compare(Myclass o1, MyClass o2) {
 
 쉽게 말해 Comparable은 기본(default) 순서를 정의하는데 사용되며, Comparator은 특별한(specific) 기준의 순서를 정의할 때 사용된다는 것이다.
 
-## 정리
-
 
 
 
