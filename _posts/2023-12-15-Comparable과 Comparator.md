@@ -1067,14 +1067,16 @@ public int compare(Myclass o1, MyClass o2) {
 
 보면 알겠지만, Comparator는 익명객체로 여러개를 생성할 수 있지만, Comparable의 경우 compareTo 하나 밖에 구현할 수 없다.
 
-그렇다보니, 보통은 Comparable은 여러분이 비교하고자 하는 가장 기본적인 설정(보통은 오름차순)으로 구현하는 경우가 많고, Comparator는 여러개를 생성할 수 있다보니 특별한 정렬을 원할 때 많이 쓰인다. 
+## 정리
+
+보통은 Comparable은 여러분이 비교하고자 하는 가장 기본적인 설정(보통은 오름차순)으로 구현하는 경우가 많고, Comparator는 여러개를 생성할 수 있다보니 특별한 정렬을 원할 때 많이 쓰인다. 
 
 쉽게 말해 Comparable은 기본(default) 순서를 정의하는데 사용되며, Comparator은 특별한(specific) 기준의 순서를 정의할 때 사용된다는 것이다.
 
+또, String의 경우 두 String간의 문자열 비교를 위해 compareTo()를 썼을 것이다. 이 메소드가 가능했던 이유가 바로 String 클래스에 Comparable을 implements하여 compareTo() 메소드를 구현하고 있기 때문에 그렇다.
 
+특히나 자바는 '객체지향'언어다. 본인이 지금 당장은 int, double 같이 기본 타입으로만 프로그래밍을 해왔을지는 몰라도, 프로젝트라던가 어떤 프로그램을 개발하려고 할 때는 객체를 중심으로 파일들을 나누고 기능들을 분리하여 따로 클래스를 만드는 등 별도로 클래스를 나누는 것이 허다할 것이다.
 
-
-
-
+결과적으로 객체들을 만약 비교하고자 한다면 결국 Comparable 혹은 Comparator는 필수요소라는 것이다. 많은 연습을 통해 익숙해지도록 하자.
 
 참고) [자바 [JAVA] - Comparable 과 Comparator의 이해](https://st-lab.tistory.com/243)
