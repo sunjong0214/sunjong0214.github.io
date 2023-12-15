@@ -1,3 +1,10 @@
+---
+categories : [Java]
+tags : [Comparable, Comparator]
+---
+
+
+
 기본적으로 Comparable과 Comparator는 모두 인터페이스(Interface)다.
 
 즉, Comparable과 Comparator 모두 인터페이스 내에 선언된 메소드를 '반드시 구현' 해야한다.
