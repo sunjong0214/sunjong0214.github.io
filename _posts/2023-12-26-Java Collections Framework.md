@@ -319,5 +319,5 @@ Set<T> treeset = new TreeSet<>();
 
  
 
-참조) \[JAVA\] - 자바 컬렉션 프레임워크 (Java Collections Framework) (tistory.com)](https://st-lab.tistory.com/142)
+참조) [Java Collection FrameWork](https://st-lab.tistory.com/142)
 
