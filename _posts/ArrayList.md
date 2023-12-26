@@ -32,3 +32,4 @@ Object[] a = {"a", "b", "d", null};
 
 첫째로 ArrayList이름으로 클래스를 생성 후 List 인터페이스를 implements 해주자.
 
+ 
