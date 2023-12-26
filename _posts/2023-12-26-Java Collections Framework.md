@@ -77,6 +77,8 @@ List Interface는 대표적인 선형 자료구조로 주로 순서가 있는 �
 
 ![](https://blog.kakaocdn.net/dn/efYO5c/btqI07cgkG0/9kd7yxy8aMkk2c40FWbPZ1/img.png)
 
+
+
 LIst를 구현하는 각 클래스들은 조금씩 특징이 다르다.
 
 - **ArrayList**
@@ -146,9 +148,13 @@ Collection 구조를 보면 알겠지만, Queue를 상속하고 있는 Deque(덱
 
 **3. PriorityQueue**
 
+
+
 **<Queue/Deque Interface에 선언된 대표적인 메소드>**
 
- ![](https://blog.kakaocdn.net/dn/cfpfoQ/btqI66JL8WF/YgwfZ2O1HRhm67NK3CovEk/img.png)
+![](https://blog.kakaocdn.net/dn/cfpfoQ/btqI66JL8WF/YgwfZ2O1HRhm67NK3CovEk/img.png)
+
+
 
 목록은 많아 보이지만 단순히 Deque는 양방향이기 때문에 헤드와 꼬리를 나누어 메소드가 더 생성 되었을 뿐이니 외울 것은 크게 없을 것이다.
 
@@ -185,6 +191,8 @@ Deque<T> queue = new LinkedList<>();
 **PriorityQueue**는 뭘까?
 
 단어 해석 그대로 '우선순위 큐'다. LinkedList는 Queue로 사용할 수 있다고 했다. 다만 큐의 원리가 선입선출이라는 전제 아래 짜여있다. 하지만 PriorityQueue는 '데이터 우선순위'에 기반하여 우선순위가 높은 데이터가 먼저 나오는 원리다. 따로 정렬방식을 지정하지 않는다면 **낮은 숫자가 높은 우선순위를 갖는다.** 쉽게 생각하면 정렬메소드인 sort()와 같은 순서로 데이터 우선순위를 갖는다는 의미다. PriorityQueue는 주어진 데이터들 중 최댓값, 혹은 최솟값을 꺼내올 때 매우 유용하게 사용될 수 있다. 다만, **사용자가 정의한 객체를 타입으로 쓸 경우 반드시 Comparator 또는 Comparable을 통해 정렬 방식을 구현해주어야 한다.**
+
+
 
 각 클래스별 생성 방법은 다음과 같다.
 
@@ -232,6 +240,8 @@ Set(세트)는 말 그대로 '집합'이다. Set의 가장 큰 특징이라 하�
 **<Set/ Interface에 선언된 대표적인 메소드>**
 
 ![](https://blog.kakaocdn.net/dn/lnanb/btqI4UqkeIl/LNvdh82l4b94aDdTkVBB0K/img.png)
+
+
 
 Set Interface을 구현하는 클래스들은 앞서 말했듯이 HashSet, LinkedHashSet, TreeSet 이렇게 3가지가 있다. 좀더 구체적으로 말하자면 TreeSet은 Set Interface를 상속받은 SortedSet Interface를 구현하고 있다. 그리고 **Set의 가장 큰 특징**은 **'중복되는 데이터를 넣지 못한다는 점'**이고, LinkedHashSet을 제외하고 대부분의 Set은 **'입력 순서대로의 저장순서를 보장하지 않는다는 점'**이다.
 
