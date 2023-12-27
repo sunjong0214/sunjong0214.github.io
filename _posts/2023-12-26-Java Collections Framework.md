@@ -1,5 +1,5 @@
 ---
-categories : [자료 구조]
+categories : [자료구조]
 tags : [Java Collections Framework, Data Structure]
 ---
 
