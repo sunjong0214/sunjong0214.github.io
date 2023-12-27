@@ -364,6 +364,356 @@ public E get(int index) {
 
 
 
+#### 2. set(int index, E value) 메소드
+
+set 메소드는 기존에 index에 위치한 데이터를 새로운 데이터(value)으로 교체하는 것이다. add 메소드는 데이터 '추가'인 반면에 set은 '교체'라는 점을 기억해두도록 하자.
+
+결과적으로 index에 위치한 데이터를 교체하는 것이기 때문에 get이랑 메소드가 유사하다. 다만 get은 해당 인덱스의 값을 반환하는 것이였다면 set은 데이터만 교체해주면 된다.
+
+```java
+@Override
+public void set(int index, E value) {
+	if (index >= size || index < 0) {	// 범위를 벗어날 경우 예외 발생
+		throw new IndexOutOfBoundsException();
+	} 
+	else {
+		// 해당 위치의 요소를 교체
+		array[index] = value;
+	}
+}
+```
+
+마찬가지로 잘못된 인덱스를 참조하고 있진 않은지 반드시 검사가 필요하다. 그냥 index로 참조하는 모든 메소드들은 반드시 검사 필요.
+
+
+
+#### 3. indexOf(Object value) 메소드
+
+indexOf 메소드는 사용자가 찾고자 하는 요소(value)의 **'위치'**를 반환하는 메소드다.
+
+그러면 이러한 질문이 들어올 수 있다. "찾고자 하는 요소가 중복된다면 어떻게 반환해야하나요?" 그 답은 **가장 먼저 마주치는 요소의 인덱스를 반환**한다는 것이다.(실제 자바에서 똑같다.)
+
+찾고자 하는 요소가 없다면 -1 을 반환한다.
+
+그리고 중요한 점은 **객체끼리 비교할 때는 동등연산자(==)가 아니라 반드시 .equals()로 비교**해야한다. 객체끼리 비교할 때 동등연산자를 쓰면 값을 비교하는 것이 아닌 주소를 비교하는 것이기 때문에 잘못된 결과가 나온다.
+
+```java
+@Override
+public int indexOf(Object value) {
+	int i = 0;
+    
+	// value와 같은 객체(요소 값)일 경우 i(위치) 반환
+	for (i = 0; i < size; i++) {
+		if (array[i].equals(value)) {
+			return i;
+		}
+	}
+	// 일치하는 것이 없을경우 -1을 반환
+	return -1;
+}
+```
+
+
+
+#### 3-1. LastindexOf(Object value) 메소드
+
+indexOf 메소드는 index가 0부터 시작했다면 거꾸로 탐색하는 과정도 있으면 좋다. 예를들어 사용자가 찾고자 하는 인덱스가 뒤 쪽으로 예상 가능할 때 굳이 앞에서부터 찾아 줄 필요가 없다. 또한 이후에 구현 할 Stack에서도 이용 가능하다.
+
+```java
+@Override
+public int lastindexOf(Object value) {
+    for(int i=size-1; i >= 0; i--) {
+        if(array[i].equals(value)) {
+            return i;
+        }
+    }
+    return -1;
+}
+```
+
+
+
+#### 4. contains(Object value) 메소드
+
+indexOf 메소드가 사용자가 찾고자 하는 요소(value)의 '위치(index)'를 반환하는 메소드였다면, contains는 사용자가 찾고자 하는 요소(value)가 존재 하는지 안 하는지를 반환하는 메소드다.
+
+찾고자 하는 요소가 존재하면 true를, 존재하지 않는다면 false를 반환한다.
+
+음? 그러면 indexOf와 기능이 비슷하니깐 이를 쓸 수 있을 것 같은데? 라는 생각이 들었다면 매우 정답이다.
+
+어차피 해당 요소가 존재하는지를 '검사'한다는 기능은 같기 때문에 indexOf 메소드를 이용하여 만약 음수가 아닌 수가 반환되었다면 요소가 존재한다는 뜻이고, 음수(-1)이 나왔다면 요소가 존재하지 않는다는 뜻이다. 즉, 아래와 같이 contains 메소드를 만들 수 있다.
+
+```java
+@Override
+public boolean contains(Object value) {
+    
+    // 0 이상이면 요소가 존재한다는 뜻
+    if(indexOf(value) >= 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+```
+
+이런 식으로 서로의 메소드를 연결해서 사용한다면 좀 더 직관적이고 이해가 쉽다. 연습하자.
+
+#### get, set, indexOf, contains 메소드 묶어보기
+
+```java
+@SuppressWarnings("unchecked")
+@Override
+public E get(int index) {
+	if(index >= size || index < 0) {
+		throw new IndexOutOfBoundsException();
+	}
+	return (E) array[index];
+}
+ 
+ 
+@Override
+public void set(int index, E value) {
+	if (index >= size || index < 0) {
+		throw new IndexOutOfBoundsException();
+	} else {
+		array[index] = value;
+	}
+}
+	
+	
+@Override
+public int indexOf(Object value) {
+	int i = 0;
+	for (i = 0; i < size; i++) {
+		if (array[i].equals(value)) {
+			return i;
+		}
+	}
+	return -1;
+}
+ 
+ 
+public int lastIndexOf(Object value) {
+	for(int i = size - 1; i >= 0; i--) {
+		if(array[i].equals(value)) {
+			return i;
+		}
+	}
+	return -1;
+}
+ 
+	
+@Override
+public boolean contains(Object value) {
+	if(indexOf(value) >= 0) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+```
+
+
+
+## remove 메소드 구현
+
+remove 메소드는 사람들이 가장 어려워하고, 가장 많이 에러가 나는 부분이다. 차근차근 공부해보자.
+
+remove 메소드의 경우 크게 2가지로 나눌 수 있다.
+
+- **특정 index의 요소를 삭제 - remove(int index)**
+- **특정 요소를 삭제 - remove(Object value)**
+
+물론 자바에 내장되어있는 ArrayList도 remove() 요소는 없다. remove(int index)와 remove(Object value) 메소드만 존재한다. 하지만 이후에 다룰 Stack 이나 LinkedList, Queue 등 다양한 자료구조들은 remove() 메소드가 존재하니 공부해두자.
+
+만약 remove() 기능을 넣어 가장 앞 또는 뒤의 요소를 제거하는 기능을 넣고 싶다면 밑에서 다룰 remove(int index)을 호출하여 파라미터로 0 또는 size-1을 넘겨주면 된다.
+
+
+
+#### 1. remove(int index) 메소드
+
+remove(int index) 는 '특정 위치에 있는 요소를 제거'하는 것이다.
+
+앞서 **add(int index, E value)를 했던 방식을 거꾸로 하면 된다는 의미**다.
+
+![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FwCmYA%2FbtqL39iXzlO%2FU50Vsl00hJ2DE7p2Bc6dKK%2Fimg.png)
+
+**코드**
+
+```java
+@SuppressWarnings("unchecked")
+@Override
+public E remove(int index) {
+ 
+	if (index >= size || index < 0) {
+		throw new IndexOutOfBoundsException();
+	}
+ 
+	E element = (E) array[index];	// 삭제될 요소를 반환하기 위해 임시로 담아둠, 원본 데이터 타입으로 반환하기 위해 E 타입으로 캐스팅
+	array[index] = null;
+    
+	// 삭제한 요소의 뒤에 있는 모든 요소들을 한 칸씩 당겨옴
+	for (int i = index; i < size - 1; i++) {
+		array[i] = array[i + 1];
+		array[i + 1] = null;
+	}
+	size--; // 요소를 하나 삭제했으니 size를 줄여준다.
+	resize(); // 삭제되면서 데이터가 일정 이상 비워진 경우 용적을 줄이기 위해 추가
+	return element;
+}
+```
+
+주의할 점은 항상 마지막 원소의 인덱스는 size보다 1 작다. 그렇기 때문에 범위 체크와, 이후의 배열 요소들을 한 칸씩 당겨올 때 시작점과 끝 점을 잘 생각해야한다.
+
+또 명시적으로 요소를 null로 처리해주어야 GC에 의해 처리가 되기 때문에 최대한 null로 처리하자. (물론 명시적으로 처리 안 해도 크게 무제는 없지만 GC가 쓰지 않는 데이터를 참조될 가능성 있는 데이터로 볼 수 있다. 메모리 및 프로그램 성능에 영향이 있을 수 있다.)
+
+
+
+#### 2. remove(Object value) 메소드
+
+remove(Object value) 메소드는 사용자가 원하는 특정 요소(value)를 찾아서 삭제하는 것이다. indexOf와 마찬가지로 중복 요소일 경우 처음 발견한 요소를 삭제한다.
+
+이 메소드에서 필요한 동작은 1) value와 같은 요소가 존재하는지, 존재한다면 어디에 존재하는지 2) 그 index의 데이터를 지우고 나머지 뒤의 요소를 하나씩 당기는 작업. 이렇게 두가지 동작이 필요하다.
+
+그렇다면 우리는 위에서 작성한 메소드를 재사용한다면 쉽게 작성할 수 있다.
+
+1)indexOf,() 2)remove(int index) 이 두개의 메소드를 사용해서 작성하자.
+
+```java
+@Override
+public boolean remove (Object value) {
+    
+    // 삭제하고자 하는 요소의 인덱스 찾기
+    int index = indexOf(value);
+    
+    // -1이라면 array에 요소가 없다는 의미이므로 false 반환
+    if(index == -1) {
+        return false;
+    }
+    
+    // index 위치에 있는 요소를 삭제
+    remove(index);
+    return true;
+}
+```
+
+
+
+#### remove 메소드 묶어보기
+
+```java
+@SuppressWarnings("unchecked")
+@Override
+public E remove(int index) {
+ 
+	if (index >= size || index < 0) {
+		throw new IndexOutOfBoundsException();
+	}
+ 
+	E element = (E) array[index];
+	array[index] = null;
+	for (int i = index; i < size - 1; i++) {
+		array[i] = array[i + 1];
+		array[i + 1] = null;
+	}
+	size--;
+	resize();
+	return element;
+}
+ 
+ 
+@Override
+public boolean remove(Object value) {
+	int index = indexOf(value);
+	if (index == -1) {
+		return false;
+	}
+ 
+	remove(index);
+	return true;
+}
+```
+
+
+
+## size, isEmpty, clear 메소드 구현
+
+#### 1. size() 메소드
+
+ArrayList가 동적으로 할당되며 여러번 메소드가 실행되다보면 리스트에 담긴 요소의 개수가 몇 개인지 기억하기 힘들고, ArrayList에서 size 변수는 private로 캡슐화 되어있기 때문에 size 변수의 값을 반환해주는 size() 메소드를 만들 필요가 있다. (캡슐화의 이유는 사용자가 size 변수의 값을 고의적으로 데이터 조작할 수 있기 때문이다.)
+
+```java
+@Override
+public int size() {
+    return size;
+}
+```
+
+
+
+#### 2. isEmpty() 메소드
+
+isEmpty() 메소드는 현재 ArrayList에 요소가 비어있는지를 알려준다.
+
+비었을 경우 true, 아니면 false를 반환한다. 즉, size == 0이면 true, size != 0 이면 false 라는 것이다. 굳이 배열을 순회할 필요가 없다.
+
+```java
+@Override
+public boolean isEmpty() {
+    return size == 0; // 조건문을 반환할 경우 true, false를 반환
+}
+```
+
+
+
+#### 3. clear() 메소드
+
+clear의 경우 모든 요소를 비워버리는 메소드다. 즉, 모든 요소를 초기화 해준다. 요소 뿐만 아니라 size 도 0으로 초기화 해주고, 배열의 용적 또한 현재 용적의 절반으로 줄일 수 있다.
+
+배열의 용적을 초기값이 아닌 절반만 줄이는 이유는 무엇일까?
+
+물론 초기값으로 초기화해도 되지만 결국 전 배열에서 사용한 데이터 용적과 근접하는 데이터가 들어올 확률이 높기 때문이다. 
+
+```java
+@Override
+public void clear() {
+    
+    // 모든 공간을 null로 처리
+    for (int i=0; i<size; i++) {
+        array[i] = null;
+    }
+    size = 0;
+    resize();
+}
+```
+
+
+
+#### size, isEmpty, clear 메소드 묶어보기
+
+```java
+@Override
+public int size() {
+	return size;
+}
+ 
+@Override
+public boolean isEmpty() {
+	return size == 0;
+}
+ 
+@Override
+public void clear() {
+	for (int i = 0; i < size; i++) {
+		array[i] = null;
+	}
+	size = 0;
+	resize();
+}
+```
+
 
 
 
