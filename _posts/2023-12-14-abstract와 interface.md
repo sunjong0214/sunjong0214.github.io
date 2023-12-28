@@ -1,4 +1,5 @@
 ---
+title : abstract와 interface
 categories : [Java]
 tags : [abstract, interface]
 ---
