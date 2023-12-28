@@ -838,4 +838,8 @@ ArrayList는 보통 index를 통해 요소에 접근하는 작업이 매우 빠�
 
 
 
+직접 작성해본 ArrayList - [ArrayList](https://github.com/sunjong0214/DataStructure/blob/main/ArrayList.java)
+
+
+
 참조) [ArrayList](https://st-lab.tistory.com/161)
