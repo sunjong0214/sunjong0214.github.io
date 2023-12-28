@@ -1,3 +1,8 @@
+---
+categories : [자료구조]
+tags : [ArrayList]
+---
+
 
 
 자바의 가장 기본적인 자료구조인 ArrayList를 구현해보자.
@@ -716,7 +721,115 @@ public void clear() {
 
 
 
+## clone, toArray 메소드 구현
 
+clone은 기존에 있던 객체를 파괴하지 않고 요소들이 동일한 객체를 새로 하나 만드는 것이다. 그리고 toArray는 리스트를 출력할 때 for-each문을 쓰기 위해 만들어보았다.
+
+중요한 부분은 아니지만 한번 살펴보자.
+
+
+
+#### 1. clone() 메소
+
+사용자가 사용하던 ArrayList를 새로 하나 복제하는 메소드다. 단순히 = 연산자로 객체를 복사하게 되면 '주소'를 복사하는 것이기 때문에 복사한 객체에서 데이터를 조작할 경우 원복 객체까지 영향을 미친다. 즉 얕은 복사(shallow copy)가 된다는 것이다.
+
+```java
+@Override
+public Object clone() throws CloneNotSupportedException {
+ 
+	// 새로운 객체 생성
+	ArrayList<?> cloneList = (ArrayList<?>)super.clone();
+ 
+	// 새로운 객체의 배열도 생성해주어야 함 (객체는 얕은복사가 되기 때문)
+	cloneList.array = new Object[size];
+ 
+	// 배열의 값을 복사함
+	System.arraycopy(array, 0, cloneList.array, 0, size);
+ 
+	return cloneList;
+}
+```
+
+clone()의 경우 Object에 있는 메소드이지만 접근제어자가 protected로 되어있어 우리가 만든 것처럼 사용자 클래스의 경우 Cloneable 인터페이스를 추가로 implements 해줘야한다.
+
+즉, public class ArrayList< E > implements List< E >에 Cloneable도 추가해야한다.
+
+그래도 설명을 조금 하자면, super.clone() 자체가 생성자 비슷한 역할이고 shallow copy를 통해 사실상 new ArrayList() 를 호출하는 격이라 제대로 완벽하게 복제하려면 clone한 리스트의 array 또한 새로 생성해서 해당 배열에 copy를 해주어야 한다.
+
+
+
+#### 2. toArray() 메소드
+
+toArray()에는 크게 두 가지가 있다. 1) ArrayList의 리스트를 객체배열(Object[])로 반환해주는 Object[] toArray() 메소드가 있고, 2) ArrayList를 이미 생성  된 다른 배열에 복사해주고자 할 때 쓰는 T[] ArrayList(T[] a) 메소드가 있다.
+
+```java
+ArrayList<Integer> list = new ArrayList<>();
+ 
+// get list to array (using toArray())
+Object[] array1 = list.toArray();
+ 
+// get list to array (using toArray(T[] a)
+Integer[] array2 = new Integer[10];
+array2 = list.toArray(array2);
+```
+
+1번의 장점은 ArrayList에 있는 요소의 수만큼 정확하게 배열의 크기가 할당되어 반환된다는 점이고,
+
+2번의 장점은 객체 클래스로 상속관계에 있는 타입이거나 Wrapper(Integer -> int) 같이 데이터 타입을 유연하게 캐스팅할 여지가 있다는 것이다. 또한 리스트에 원소 5개가 있고, array2에 10개의 원소가 있다면 array2에 0~4 index에 리스트에 있던 원소가 복사되고, 그 외의 원소는 기존 array2배열에 초기화 되어있던 원소가 그대로 남는다.
+
+구현은 다음과 같다.
+
+```java
+public Object[] toArray() {
+	return Arrays.copyOf(array, size);
+}
+	
+ 
+@SuppressWarnings("unchecked")
+public <T> T[] toArray(T[] a) {
+	if (a.length < size) {
+		// copyOf(원본 배열, 복사할 길이, Class<? extends T[]> 타입)
+		return (T[]) Arrays.copyOf(array, size, a.getClass());
+	}
+	// 원본배열, 원본배열 시작위치, 복사할 배열, 복사할배열 시작위치, 복사할 요소 수 
+	System.arraycopy(array, 0, a, 0, size);
+	return a;
+}
+```
+
+Object[] toArray() 메소드의 경우 원본배열(array)를 요소 개수(size)만큼 복사하여 Object[] 배열을 반환해주는 메소드다. 이 것을 그대로 써서 반환해주면 되기 때문에 크게 어렵지 않다.
+
+ 
+
+두 번째 T[] toArray(T[] a) 메소드를 보자.
+
+이 부분은 제네릭 메소드로, 우리가 만들었던 ArrayList의 E타입하고는 다른 제네릭이다. 예로들어 E Type이 Integer라고 가정하고, T타입은 Object 라고 해보자.
+
+Object는 Integer보다 상위 타입으로, Object 안에 Integer 타입의 데이터를 담을 수도 있다. 이 외에도 사용자가 만든 부모, 자식 클래스 같이 상속관계에 있는 클래스들에서 하위 타입이 상위 타입으로 데이터를 받고 싶을 때 쓸 수 있도록 하기 위함이다.
+
+즉, 상위타입으로 들어오는 객체에 대해서도 데이터를 담을 수 있도록 별도의 제네릭메소드를 구성하는 것이다.
+
+그리고, 들어오는 배열(a)가 현재 array의 요소 개수(size)보다 작으면 size에 맞게 a의 공간을 재할당 하면서 array에 있던 모든 요소를 복사한다.
+
+쉽게 이해해보면 ArrayList의 array의 요소가 4개 {1, 2, 3, 4} 있다고 치자. 그리고 Object[] copy = new Object[1]라는 배열을 하나 만들었는데, 공간이 한 개 밖에 없다.
+
+그러면 array의 요소 1개만 복사하는 것이 아니라 copy 배열의 사이즈가 1에서 4로 증가하여 copy배열에 {1, 2, 3, 4}가 모두 담기게 되는 것이다.
+
+또한 앞서 상위타입에 대해서도 담을 수 있도록 하기 위해 copyOf메소드에서 Class라는 파라미터를 마지막에 넣어준다.(a.getClass()) 그런다음 Object[] 배열로 리턴 된 것을 T[] 타입으로 캐스팅하여 반환해주면 된다.
+
+반대로 파라미터로 들어오는 배열의 크기가 현재 ArrayList에 있는 array보다 크다면 앞 부분부터 array에 있던 요소만 복사해서 a배열에 넣고 반환해주면 된다.
+
+
+
+## 정리
+
+ArrayList는 보통 index를 통해 요소에 접근하는 작업이 매우 빠르고, 반대로 중간 삽입, 삭제의 경우 비효율적이다
+
+![](https://blog.kakaocdn.net/dn/c47wrr/btqNG0s9sD1/GE9KaZbmsXUbPKVzOkon20/img.png)
+
+앞으로 구현할 LinkedList와의 차이점이다.
+
+서로 장단점이 뚜렷해 상황에 맞게 각 자료구조를 사용하면 된다.
 
 
 
