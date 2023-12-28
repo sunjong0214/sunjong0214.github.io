@@ -1,4 +1,5 @@
 ---
+title : ArrayList
 categories : [자료구조]
 tags : [ArrayList]
 ---

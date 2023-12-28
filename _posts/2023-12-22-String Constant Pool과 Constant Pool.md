@@ -1,4 +1,5 @@
 ---
+title : String Constant Pool과 Constant Pool
 categories : [Java]
 tags : [String Constant Pool, Constant Pool]
 ---

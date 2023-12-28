@@ -1,4 +1,5 @@
 ---
+title : List Interface
 categories : [자료구조]
 tags : [List Interface]
 ---

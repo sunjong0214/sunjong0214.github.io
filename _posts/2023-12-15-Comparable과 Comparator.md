@@ -1,4 +1,5 @@
 ---
+title : Comparable과 Comparator
 categories : [Java]
 tags : [Comparable, Comparator]
 ---

@@ -1,4 +1,5 @@
 ---
+title : 상속(Inheriterce)
 categories : [Java]
 tags : [inheriterce, extends, implements]
 ---
