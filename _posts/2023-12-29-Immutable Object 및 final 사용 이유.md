@@ -118,6 +118,60 @@ public void createHolder() {
   list.add("a");
   ```
 
-- 
+- 불변 클래스
+
+  Java에서 불변 객체를 생성하기 위해서는 다음과 같은 규칙에 따라서 생성해야한다.
+
+  1. 클래스를 final로 선언
+  2. 모든 클래스 변수를 private와 final로 선언
+  3. 객체를 생성하기 위한 생성자 또는 정적 팩토리 메소드를 추가하라
+  4. 참조에 의해 변경 가능성이 있는 경우 방어적 복사를 이용해 전달
+
+  ```java
+  public final class ImmutableClass {
+      private final int age;
+      private final String name;
+      private final List<String> list;
+  
+      private ImmutableClass(int age, String name) {
+          this.age = age;
+          this.name = name;
+          this.list = new ArrayList<>();
+      }
+  
+      public static ImmutableClass of(int age, String name) {
+          return new ImmutableClass(age, name);
+      }
+      
+      public int getAge() {
+          return age;
+      }
+  
+      public String getName() {
+          return name;
+      }
+  
+      public List<String> getList() {
+          return Collections.unmodifiableList(list);
+      }
+      
+  }
+  출처: https://mangkyu.tistory.com/131 [MangKyu's Diary:티스토리]
+  ```
+
+  위의 코드에서 특히 주목해야 하는 부분은 내부 생성자를 만드는 대신 객체의 생성을 위해 정적 팩토리 메소드를 제공하고 있다는 점과 참조를 전달하여 클라이언트에 의해 수정가능성이 있는 list를 방어적 복사하여 제공하고 있다는 것이다.
+  Java에서는 생성자를 선언하지 않으면 기본 생성자가 자동으로 생성되는데, 그러면 다른 클래스에서 해당 객체를 자유롭게 호출할 수 있다. 그렇기 때문에 내부 생성자를 만드는 대신 정적 팩토리 메소드를 통해 객체를 생성하도록 강요하는 것이 좋다.
+  또한 배열이나 다른 객체 또는 컬렉션은 참조가 전달되어 수정가능성이 있다. 그렇기 때문에 참조를 통해 변경이 가능한 경우에는 방어적 복사를 통해 값을 반환해야 한다. 마지막으로 클래스의 변수에 가능하다면 final을, final이 불가능하다면 Setter를 최소화하도록 하자.
+  
+  
+
+Java에 대한 유명한 책인 Effective Java에는 다음과 같은 구문이 적혀있다. 이를 명심하고 개발하도록 하자.
+
+> ```
+> 클래스들은 가변적이여야 하는 매우 타당한 이유가 있지 않는 한 반드시 불변으로 만들어야 한다. 
+> 만약 클래스를 불변으로 만드는 것이 불가능하다면, 가능한 변경 가능성을 최소화하라.
+> - Effective Java -
+> ```
+>
 
 참조) [Immutable Object(불변 객체) 및 final 사용 이유](https://mangkyu.tistory.com/131)
