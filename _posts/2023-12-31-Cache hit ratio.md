@@ -1,3 +1,10 @@
+---
+categories : [CS]
+tags : [cache, memory]
+---
+
+
+
 ## 기억장치
 
 cpu 저장치 레지스터가 있고, cpu 명령이나 자료를 일시적으로 저장해주는 캐시가 있다.
