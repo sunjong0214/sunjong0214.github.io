@@ -147,7 +147,9 @@ Constant Pool은 - Method Area에 있는 Metaspace 영역, 클래스 파일에 �
 
 크게 위와 같이 나눌 수 있다.
 
-참조) [[Java\] 많이 헷갈려하는 String constant pool과 Runtime Constant pool, Class file constant pool (tistory.com)](https://deveric.tistory.com/123)
+출처) 
+
+[[Java\] 많이 헷갈려하는 String constant pool과 Runtime Constant pool, Class file constant pool (tistory.com)](https://deveric.tistory.com/123)
 
 [자바의 String과 Constant Pool (tistory.com)](https://jiwondev.tistory.com/114)
 

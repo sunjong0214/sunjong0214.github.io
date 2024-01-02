@@ -1087,4 +1087,4 @@ public int compare(Myclass o1, MyClass o2) {
 
 결과적으로 객체들을 만약 비교하고자 한다면 결국 Comparable 혹은 Comparator는 필수요소라는 것이다. 많은 연습을 통해 익숙해지도록 하자.
 
-참고) [자바 [JAVA] - Comparable 과 Comparator의 이해](https://st-lab.tistory.com/243)
+출처) [자바 [JAVA] - Comparable 과 Comparator의 이해](https://st-lab.tistory.com/243)

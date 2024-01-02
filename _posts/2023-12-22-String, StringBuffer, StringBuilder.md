@@ -229,7 +229,7 @@ StringBuilder는 Thread safe 하지 않아서 각기 쓰레드가 객체에 접�
 
 
 
-참조) 
+출처) 
 
 [String, StringBuffer, StringBuilder - Incheol's TECH BLOG (gitbook.io)](https://incheol-jung.gitbook.io/docs/q-and-a/java/string-stringbuffer-stringbuilder)
 

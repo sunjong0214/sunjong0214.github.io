@@ -335,5 +335,5 @@ Set<T> treeset = new TreeSet<>();
 
  
 
-참조) [Java Collection FrameWork](https://st-lab.tistory.com/142)
+출처) [Java Collection FrameWork](https://st-lab.tistory.com/142)
 

@@ -150,7 +150,7 @@ public class Student implements Cloneable {
 
 
 
-참조) 
+출처) 
 
 [Shallow copy VS Deep copy](https://velog.io/@ellyheetov/Shallow-Copy-VS-Deep-Copy)
 

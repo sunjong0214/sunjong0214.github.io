@@ -181,7 +181,7 @@ extends와 implemets 에 대해서는 정리가 끝났지만 abstract에 대해�
 
 
 
-[참조]
+출처)
 
 [Java - Inheritance]([Java - Inheritance (tutorialspoint.com)](https://www.tutorialspoint.com/java/java_inheritance.htm))
 

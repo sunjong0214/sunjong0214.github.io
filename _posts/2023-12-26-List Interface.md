@@ -213,4 +213,4 @@ st-lab님의 블로그를 참고하여 작성한 글이다. st-lab님의 블로�
 
 
 
-참조) [List Interface](https://st-lab.tistory.com/146)
+출처) [List Interface](https://st-lab.tistory.com/146)

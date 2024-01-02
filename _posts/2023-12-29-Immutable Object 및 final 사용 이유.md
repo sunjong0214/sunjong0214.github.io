@@ -174,4 +174,6 @@ Java에 대한 유명한 책인 Effective Java에는 다음과 같은 구문이 
 > ```
 >
 
-참조) [Immutable Object(불변 객체) 및 final 사용 이유](https://mangkyu.tistory.com/131)
+
+
+출처) [Immutable Object(불변 객체) 및 final 사용 이유](https://mangkyu.tistory.com/131)
