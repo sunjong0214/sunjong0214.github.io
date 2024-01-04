@@ -277,7 +277,8 @@ public class SinglyLinkedList<E> implements List<E> {
 	 */
     sort(null);
   }
-
+  
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public void sort(Comparator<? super E> a) {
     Object[] c = this.toArray(); // toArray로 배열 불러오기
     Arrays.sort(c, (Comparator) a);
