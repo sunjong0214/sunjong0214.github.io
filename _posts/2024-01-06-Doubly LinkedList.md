@@ -1,4 +1,5 @@
 ---
+title : Doubly LinkedList
 categories : [자료구조]
 tags : [Linked List, 자료구조]
 ---
