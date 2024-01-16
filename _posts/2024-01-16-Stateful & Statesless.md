@@ -127,6 +127,6 @@ X : 결제가 완료되었습니다. (서버는 아무것도 기억하지 않음
 
 출처) 
 
-[Stateful 과 Stateless 의 차이 | ROXY (iro.ooo)](https://roxy.iro.ooo/infra/protocol/http/http-stateful-stateless)
+[Stateful 과 Stateless 의 차이](https://roxy.iro.ooo/infra/protocol/http/http-stateful-stateless)
 
 [Stateful, Stateless 차이, 비연결성(connectionless) (tistory.com)](https://devmango.tistory.com/68)
