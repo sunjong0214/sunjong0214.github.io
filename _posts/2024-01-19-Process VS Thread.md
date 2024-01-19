@@ -1,6 +1,6 @@
 ---
 title : Process VS Thread
-categories : [CS]
+categories : [운영체제]
 tags : [Thread, Process]
 ---
 

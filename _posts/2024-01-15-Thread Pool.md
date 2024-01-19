@@ -1,6 +1,6 @@
 ---
 title : Thread와 Thread Pool
-categoies : [CS]
+categoies : [운영체제]
 tags : [Thread, Thread Pool]
 ---
 
