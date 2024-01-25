@@ -43,11 +43,11 @@ tags : [Thread, Process, Context Switching]
 
 이런 식으로 컨텍스트 스위칭이 발생할 때 실행하던 스레드의 상태를 저장하고 불러올 스레드의 상태를 로딩한다.
 
-![스크린샷 2024-01-19 153414](https://github.com/sunjong0214/CS-JAVA/assets/117134728/3a8f35aa-9a00-4f2b-b5ee-7a14a086cc59)
+![스크린샷 2024-01-19 153414](https://github-production-user-asset-6210df.s3.amazonaws.com/117134728/299503360-3a8f35aa-9a00-4f2b-b5ee-7a14a086cc59.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240125%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240125T005641Z&X-Amz-Expires=300&X-Amz-Signature=5f228375a4dda732ee768a1e8d81e2688815408bd84f364ea9100e40cfae6f89&X-Amz-SignedHeaders=host&actor_id=117134728&key_id=0&repo_id=719445007)
 
 #### 다른 프로세스의 스레드
 
-![스크린샷 2024-01-19 153515](https://github.com/sunjong0214/CS-JAVA/assets/117134728/a7250892-a544-48ee-b8dd-756a815d17a8)
+![](https://github-production-user-asset-6210df.s3.amazonaws.com/117134728/299503629-a7250892-a544-48ee-b8dd-756a815d17a8.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240125%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240125T005543Z&X-Amz-Expires=300&X-Amz-Signature=8e33b977bb56bc45617044dcb35a3bb8ae19d31cd2b3c5d200c5582fa4ae20b1&X-Amz-SignedHeaders=host&actor_id=117134728&key_id=0&repo_id=719445007)
 
 다음과 같이 컨텍스트 스위칭이 일어나기 전 가상 메모리 주소 관련 추가 처리를 해줘야한다. 
 
