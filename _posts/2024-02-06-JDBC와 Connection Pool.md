@@ -1,6 +1,6 @@
 ---
-title : JDBC란
-categories : [JAVA]
+title : JDBC와 Connection Pool
+categories : [Java]
 tags : [DB, JDBC]
 ---
 
