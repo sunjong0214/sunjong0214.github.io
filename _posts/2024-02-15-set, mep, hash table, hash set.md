@@ -1,10 +1,10 @@
 ---
-title : Hash set과 Hash map
+title : map과 hash map (hash table)
 categories : [자료구조]
-tags : [set, map, Hash set, Hash map, Hash table, 객체의 중복 제거]
+tags : [map, Hash map, hash table]
 ---
 
-이번 포스트는 ADT인 set과 map과 그것들의 DS(Data Structure)인 Hash set과 Hash map에 대해 알아보자.
+이번 포스트는 ADT인  map과 DS(Data Structure)인 Hash map에 대해 알아보자.
 
 ## map
 
@@ -118,6 +118,30 @@ open addressing의 경우 resizing이 필수적으로 필요하다. 빈 index에
 ## separate chaining VS open addressing
 
 ![image](https://github.com/sunjong0214/algorithm-study/assets/117134728/42dbfc03-aed3-4f4e-93be-048ae86f4135)
+
+## 정리
+
+Java에서의 HashMap은 separate chaining을 기본으로 사용하기 때문에 알아두자.
+
+또 hash table과 hash map은 사용 방법과 key와 pair 형태인 점까지 거의 똑같다.
+
+하지만 두 클래스의 큰 차이점은 Thread-safe와 NULL처리에 있다.
+
+#### Hash table
+
+- Thread-safe
+
+- NULL을 허용 X 
+
+#### Hash map
+
+- Thread-safe하지 않아 성능이 더 좋음
+
+-  NULL을 허용한다는 차이점이 있다.
+
+
+
+
 
 출처)
 
