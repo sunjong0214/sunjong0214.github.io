@@ -1,6 +1,6 @@
 ---
 title : forward, include, redirect 비교
-categories : [JAVA]
+categories : [Java]
 tags : [java, jsp, redirect, forward, include]
 ---
 
