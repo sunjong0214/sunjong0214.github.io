@@ -1,7 +1,7 @@
 ---
 title : forward, include, redirect 비교
-categories : [Java]
-tags : [java, jsp, redirect, forward, include]
+categories : [Web]
+tags : [web, jsp, redirect, forward, include]
 ---
 
 JSP 환경에서 페이지에서 작업 중일 때 다른 페이지로 이동하는 방식에 대해 알아보자.
