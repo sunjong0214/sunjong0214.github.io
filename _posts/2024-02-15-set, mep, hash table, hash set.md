@@ -1,12 +1,23 @@
 ---
-title : map과 hash map (hash table)
+title : set, map과 hash function(hash table)
 categories : [자료구조]
-tags : [map, Hash map, hash table]
+tags : [set, map, hash set, hash map, hash table]
 ---
 
-이번 포스트는 ADT인  map과 DS(Data Structure)인 Hash map에 대해 알아보자.
+이번 포스트는 ADT인  set, map과 DS(Data Structure)인 Hash map에 대해 알아보자.
 
-## map
+## Set
+
+- 데이터를 저장하는 ADT
+- `순서를 보장하지 않음`
+- `데이터 중복을 허용 X`
+- 데이터 조회가 `List보다 더 빠름`
+
+자바에서 Set을 구현한 대표적인 DS인 HashSet은 Map의 구현체인 HashMap을 사용해 구현되어 있다.
+
+
+
+## Map
 
 - key-value pair들을 저장하는 ADT
 - 같은 key를 가지는 pair는 최대 한 개만 존재
@@ -16,13 +27,17 @@ map은 key와 value를 사용하며 key라고 불리는 데이터를 통해 저�
 
 보통 우리는 Hash map(table)과 tree-based로 구현해 많이 사용한다.
 
+
+
 ## Hash map (Hash table)
 
 - 배열과 해시 함수(hash function)를 사용해 map을 구현한 자료구조
 
 - (일반적으로) 상수 시간으로 데이터에 접근하기 때문에 빠르다
 
-#### Hash function이란
+
+
+## Hash function
 
 - 임의의 크기를 가지는 type의 데이터를 고정된 크기를 가지는 type의 데이터로 변환하는 함수
 - (hash table에서) 임의의 데이터를 정수로 변환하는 함수
