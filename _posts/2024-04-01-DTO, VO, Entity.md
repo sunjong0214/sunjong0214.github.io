@@ -1,6 +1,6 @@
 ---
 title : DTO, VO, Entity
-categories : [Project]
+categories : [Spring]
 tags : [dto, vo, entity, db]
 ---
 
