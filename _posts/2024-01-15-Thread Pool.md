@@ -1,7 +1,7 @@
 ---
 title : Thread와 Thread Pool
 categoies : [운영체제]
-tags : [Thread, Thread Pool]
+tags : [thread, thread pool]
 ---
 
 Thread란 프로세스가 실행될 때 요청들을 처리하는 것, 코드의 실행 흐름을 의미한다.

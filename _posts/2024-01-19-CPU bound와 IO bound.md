@@ -1,7 +1,7 @@
 ---
 title : CPU bound, IO bound
 categories : [운영체제]
-tags : [CPU bound, IO bound]
+tags : [cpu bound, io bound]
 ---
 
 CPU bound, IO bound에 대해 이야기하기 전에 CPU, IO가 무엇인지 짧게 살펴보자.

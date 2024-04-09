@@ -1,7 +1,7 @@
 ---
 title : LinkedList Queue
 categoies : [자료구조]
-tags : [Queue]
+tags : [queue]
 ---
 
 

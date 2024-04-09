@@ -1,7 +1,7 @@
 ---
 title : Context Switching
 categories : [운영체제]
-tags : [Thread, Process, Context Switching]
+tags : [thread, process, context switching]
 ---
 
 ## Context Switching

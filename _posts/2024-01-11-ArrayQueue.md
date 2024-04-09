@@ -1,7 +1,7 @@
 ---
 title : ArrayQueue
 categories : [자료구조]
-tags : [Queue, 자료구조]
+tags : [queue, 자료구조]
 ---
 
 Queue는 기본적으로 **'선입선출'**인 자료구조이다. 예를 들어 대기열, 놀이공원에서 기구를 기다릴 때 서 있는 대기 줄을 생각하면 된다.

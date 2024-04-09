@@ -1,7 +1,7 @@
 ---
 title : Stateful과 Stateless
 categories : [HTTP]
-tags : [Stateful, Stateless]
+tags : [stateful, stateless]
 ---
 
 Http의 특징 중 Stateful과 Stateless에 대해 알아보자.

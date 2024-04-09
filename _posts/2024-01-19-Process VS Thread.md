@@ -1,7 +1,7 @@
 ---
 title : Process VS Thread
 categories : [운영체제]
-tags : [Thread, Process]
+tags : [thread, process]
 ---
 
 ## Process
