@@ -72,14 +72,14 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
   @Override
   public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
       NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+      HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
+    HttpSession session = request.getSession();
     return session.getAttribute("loginUser");
   }
 }
 ```
 
-위는 프로젝트 팀원 분의 코드를 가져온 것이다.
 
-위 코드를 사용하다보니 @LoginUser 어노테이션이 붙은 메소드가 실행될 때 마다 session을 생성하는 문제가 발생했다.
 
 #### 문제 코드
 
@@ -87,11 +87,13 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
   @Override
   public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
       NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+    HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
+    HttpSession session = request.getSession();   
     return session.getAttribute("loginUser");
   }
 ```
 
-위와 같이 session에서 getAttribute를 실행할 시 만약 session이 있다면 정상 작동하지만 session == null일 시 로그인한 유저가 없음에도 session을 생성해준다. (Session의 특징)
+위와 같이 session을 request.getSession을 실행할 시 만약 session이 있다면 정상 작동하지만 session == null일 시 로그인한 유저가 없음에도 session을 생성해준다. (Session의 특징)
 
 또한 supportsParameter 메서드에서 class 타입을 확인하는 부분에서 equals보다는 isAssignableFrom이 더 적절해 리팩토링이 필요했다.
 
