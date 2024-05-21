@@ -89,7 +89,21 @@ tags : [java, exception, error]
   - 어떤 문제가 발생했는지 예외 문구를 보고 파악할 수 있어야 한다.
   - 만약 SQLException과 같이 복구가 불가능한 예외라면 throws를 던지기 보단 언체크/런타임 예외로 전환해주는 것이 좋다.
 
+- 예외 전환을 하거나 새로운 예외를 만들 때 `꼭 기존 예외를 포함`
 
+  - 만약 SQLException이 발생해 예외 전환 시 기존 예외를 포함 시켜서 던져야한다.
+
+    ```java
+     public class MyRuntimeException extends RuntimeException{
+        public MyRuntimeException(Throwable cause) {
+          super(cause);
+        }
+      }
+    ```
+
+    이와 같이 생성자 중 `Throwble을 파라미터로 받는 생성자`를 만들어 기존 예외를 넘겨줘야한다.
+
+  - 기존 예외를 생략 시, `어떤 예외가 발생했는지 알 수 없기 때문에` 꼭 기존 예외를 포함시켜서 던져야한다.
 
 출처)
 
