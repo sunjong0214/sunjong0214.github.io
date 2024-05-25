@@ -93,11 +93,13 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
   }
 ```
 
-위와 같이 session을 request.getSession을 실행할 시 만약 session이 있다면 정상 작동하지만 session == null일 시 로그인한 유저가 없음에도 session을 생성해준다. (Session의 특징)
+위와 같이 session을 꺼내올 때 request.getSession()을 실행하면 session이 있을 땐 정상 작동하지만 session == null일 시 로그인한 유저가 없음에도 session을 생성해준다. (Session의 특징)
 
 또한 supportsParameter 메서드에서 class 타입을 확인하는 부분에서 equals보다는 isAssignableFrom이 더 적절해 리팩토링이 필요했다.
 
 ![image](https://github.com/sunjong0214/algorithm-study/assets/117134728/8c29310e-0bdb-4182-a132-d59f9800c21c)
+
+그리고 HttpSession을 필드에 선언한 뒤 DI 받을 시 세션이 싱글톤으로 생성되어 여러 문제가 발생 할 수 있었다.
 
 이런 문제를 해결해보았다.
 

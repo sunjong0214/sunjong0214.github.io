@@ -6,7 +6,7 @@ tags : [bindingResult, spring]
 
 
 
-BindingResult를 통해 서버 사이드에서 검증을 체크할 떄 MVC 패턴으로는 타임리프를 이용해 쉽게 error 메시지 출력이 가능했다.
+BindingResult를 통해 서버 사이드에서 검증할 때 MVC 패턴에서는 타임리프를 이용해 쉽게 error 메시지 출력이 가능했다.
 
 그러다 프로젝트 중 요구사항이 변경되어 MVC가 아닌 Rest API 방식으로 검증 오류 메시지 출력이 필요해졌다.
 
@@ -27,8 +27,6 @@ public String update(@Validated @ModelAttribute Member member, BindingResult bin
 ```
 
 다음과 같이 error가 발생되면 @ModelAttribute가 붙어있는 Member 객체에 bindingResult가 함께 model에 담겨 랜더링이 가능했다.
-
-#### 
 
 ## 요구사항 변경에 따른 문제
 
