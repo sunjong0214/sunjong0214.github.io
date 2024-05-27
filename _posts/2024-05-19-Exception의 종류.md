@@ -1,6 +1,6 @@
 ---
 title : Check Exception과 Uncheck Exception
-categories : [JAVA]
+categories : [Java]
 tags : [java, exception, error]
 ---
 
