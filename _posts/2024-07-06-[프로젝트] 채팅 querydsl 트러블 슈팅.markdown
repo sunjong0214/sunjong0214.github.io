@@ -1,0 +1,121 @@
+---
+title : "[프로젝트] 채팅 querydsl projections 사용시 트러블 슈팅"
+category : [Spring]
+tags : [spring, querydsl]
+---
+
+## Querydsl Projections 사용시 발생한 문제 해결 과정 
+
+프로젝트 진행 중 발생한 오류에 관해 기록했습니다. 
+
+### QueryDsl에서 Projections.bean() 사용 시 발생하는 ExpressionException 일으킨 기존 코드 
+
+```java
+package com.WalkiePaw.domain.chatroom.repository;
+
+import com.WalkiePaw.presentation.domain.chatroom.dto.ChatroomListResponse;
+import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+import static com.WalkiePaw.domain.chatroom.entity.QChatroom.*;
+
+@Repository
+@RequiredArgsConstructor
+public class ChatroomRepositoryOverrideImpl implements ChatroomRepositoryOverride {
+
+    private final JPAQueryFactory jpaQueryFactory;
+
+    @Override
+    public List<ChatroomListResponse> findByMemberId(final Integer memberId) {
+        return jpaQueryFactory
+                .select(Projections.fields(ChatroomListResponse.class,
+                        chatroom.id, chatroom.board.location, chatroom.member.nickname
+                        , chatroom.latestMessage, chatroom.unreadCount
+                ))
+                .from(chatroom)
+                .where(chatroom.board.id.eq(memberId).or(chatroom.member.id.eq(memberId)))
+                .fetch();
+    }
+}
+
+
+```
+
+
+---
+### 에러 발생 
+
+![스크린샷 2024-07-05 오후 2 42 18](https://github.com/chaexrin/chaexrin.github.io/assets/150896440/63057299-aa09-46da-8161-6e28ae7527d2)
+
+Projections.bean()은 기본 생성자와 setter를 기반으로 동작한다, 그래서 해당 DTO에 기본생성자가 없으면면 에러가 발생!!!
+
+또한 setter가 없다면 DTO의 필드에 값이 할당되지 못해서 모든 필드가 null이 되므로 주의해야한다.
+
+
+
+
+### 오류 해결 전 ChatroomListResponse 코드
+```java
+
+package com.WalkiePaw.presentation.domain.chatroom.dto;
+
+import com.WalkiePaw.domain.chatroom.entity.Chatroom;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+
+@Data
+@AllArgsConstructor
+public class ChatroomListResponse {
+    private final Integer id;
+    private final String location;
+    private final String nickname;
+    private final String latestMessage;
+    private final int unreadCount;
+    
+    
+
+    public static ChatroomListResponse from(final Chatroom chatroom) {
+        return new ChatroomListResponse(chatroom.getId(), chatroom.getBoard().getLocation(),
+                 chatroom.getMember().getNickname(), chatroom.getLatestMessage(), chatroom.getUnreadCount());
+    }
+}
+
+
+```
+### 오류 해결 후 ChatroomListResponse 코드 🧏🏻‍♀️
+
+```java
+
+package com.WalkiePaw.presentation.domain.chatroom.dto;
+
+import com.WalkiePaw.domain.chatroom.entity.Chatroom;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class ChatroomListResponse {
+    private Integer id;
+    private String location;
+    private String nickname;
+    private String latestMessage;
+    private int unreadCount;
+
+    public static ChatroomListResponse from(final Chatroom chatroom) {
+        return new ChatroomListResponse(chatroom.getId(), chatroom.getBoard().getLocation(),
+                 chatroom.getMember().getNickname(), chatroom.getLatestMessage(), chatroom.getUnreadCount());
+    }
+}
+
+
+```
+
+#### 🧠 `결론 : Projection에서 사용할 DTO에는 @NoArgsConstructor와 @Setter를 꼭 붙이자`
