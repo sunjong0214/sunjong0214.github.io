@@ -1,6 +1,6 @@
 ---
-title : [프로젝트] 채팅 querydsl projections 사용시 트러블 슈팅
-category : [Spring]
+title : Querydsl projections 사용시 트러블 슈팅
+categories : [Spring]
 tags : [spring, querydsl]
 ---
 
