@@ -304,3 +304,9 @@ Spring Data JPA에 대해 알아보자
 - isNew() 메소드에 내가 직접 새로운 엔티티를 식별할 조건을 넣어주면 된다.
 
 - 보통 우리가 기존의 Auditing을 사용한 경우 createDate로 식별하는 방법을 자주 사용한다. (새로운 엔티티면 DB에 insert가 안되어있기 때문에 createDate == null이다)
+
+
+
+출처)
+
+[실전! 스프링 데이터 JPA 강의 | 김영한 - 인프런 (inflearn.com)](https://www.inflearn.com/course/스프링-데이터-JPA-실전)
