@@ -67,6 +67,51 @@ BatchSize를 적용해  연관된 사진을 in 절로 한번에 불러오는 bat
 
 
 
+## 하이버네이트 6.2 변경사항
+
+- 위에서 batch_size를 사용시 캐싱에 대해 설명했다.
+
+- 하지만 하이버네이트 6.2로 들어서면서 where in 문법 대신 array_contains를 사용하면서 위와 같은 문제를 해결했다.
+
+- `where in 문법`
+
+  - preparedstatement 캐싱해서 사용해도 size = 100 일 때 14개의 SQL 문을 캐싱해야됨
+
+  - ex)
+
+    ```java
+    where item.item_id in(?)
+    where item.item_id in(?,?)
+    where item.item_id in(?,?,?,?)
+    ```
+
+- `array_contains 문법`
+
+  - where in과 결과는 같지만 성능 최적화 가능
+
+  - array_contains는 배열을 이용해서 하나의 SQL 문 캐싱으로 해결 가능
+
+  - () 안에 왼쪽에 배열이 들어가고 오른쪽에 들어간 값과 같다면 참으로 반환
+
+  - ex)
+
+    ```java
+    select ... where array_contains(?,item.item_id)
+    --------------------------------------------------
+    //where in VS array_contains
+        
+    //array_contains
+    select ... where array_contains([1,2,3],item.item_id) 
+    //where in
+    select ... item.item_id where in(1,2,3)
+    ```
+  
+  - 위 두 SQL 문은 같은 결과를 반환한다.
+  
+  - 이로써 하나의 SQL 문을 캐싱하고 동적으로 늘어나도 같은 SQL 구문을 그대로 사용해 성능 최적화가 가능하다.
+
+
+
 출처)
 
 [default_batch_fetch_size 관련질문 - 인프런 (inflearn.com)](https://www.inflearn.com/questions/34469/default-batch-fetch-size-관련질문)
